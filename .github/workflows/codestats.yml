@@ -1,0 +1,50 @@
+name: "📊 Code Stats Analysis"
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  codestats:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php-version: [8.2, 8.3, 8.4, 8.5]
+
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v6
+
+      - name: "Setup PHP"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          coverage: none
+          tools: composer:v2
+
+      - name: "Install dependencies"
+        run: composer install --dev --no-progress --prefer-dist
+
+      - name: "Bootstrap Configuration (if missing)"
+        run: |
+          if [ ! -f codestats-analyzer.xml ]; then
+            php -r "require 'vendor/autoload.php'; \DeveloperSamuel\PhpCodeStats\Installer::copyConfig();"
+          fi
+
+      - name: "Run Metrics Analysis"
+        run: |
+          echo "### 📊 Code Metrics Summary (PHP ${{ matrix.php-version }})" >> $GITHUB_STEP_SUMMARY
+          echo "#### Stats Count:" >> $GITHUB_STEP_SUMMARY
+          php bin/count-stats >> $GITHUB_STEP_SUMMARY
+          echo "#### Files Count:" >> $GITHUB_STEP_SUMMARY
+          php bin/count-files >> $GITHUB_STEP_SUMMARY
+          echo "#### Rows Count:" >> $GITHUB_STEP_SUMMARY
+          php bin/count-rows >> $GITHUB_STEP_SUMMARY
+          echo "#### Characters Count:" >> $GITHUB_STEP_SUMMARY
+          php bin/count-chars >> $GITHUB_STEP_SUMMARY

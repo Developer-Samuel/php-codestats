@@ -1,0 +1,47 @@
+{
+  "name": "developer-samuel/php-codestats",
+  "description": "A high-performance, strictly typed CLI tool for fast source code volume metrics (files, rows, and characters).",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "DeveloperSamuel\\PhpCodeStats\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "samuel.programmer",
+      "homepage": "https://github.com/developer-samuel"
+    }
+  ],
+  "minimum-stability": "stable",
+  "bin": [
+    "bin/count-stats",
+    "bin/count-files",
+    "bin/count-rows",
+    "bin/count-chars"
+  ],
+  "require": {
+    "php": "^8.2"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^2.1",
+    "rector/rector": "^2.3"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "DeveloperSamuel\\PhpCodeStats\\Installer::copyConfig"
+    ],
+    "post-update-cmd": [
+      "DeveloperSamuel\\PhpCodeStats\\Installer::copyConfig"
+    ],
+    "php-stan": [
+      "Composer\\Config::disableProcessTimeout",
+      "phpstan analyse --memory-limit=1G"
+    ],
+    "rector:fix": [
+      "Composer\\Config::disableProcessTimeout",
+      "rector process"
+    ]
+  }
+}
