@@ -128,9 +128,9 @@ class StatsCounter extends AbstractFileCounter
     */
     private function printMainMetrics(array $totals, int $width): void
     {
-        printf("%-{$width}s %10d\n", "Total Files:", $totals['files']);
-        printf("%-{$width}s %10d\n", "Total Lines:", $totals['lines']);
-        printf("%-{$width}s %10d\n", "Total Chars:", $totals['chars']);
+        OutputPrinter::printFormattedRow("Total Files:", $totals['files'], $width);
+        OutputPrinter::printFormattedRow("Total Lines:", $totals['lines'], $width);
+        OutputPrinter::printFormattedRow("Total Chars:", $totals['chars'], $width);
     }
 
     /**
@@ -145,14 +145,14 @@ class StatsCounter extends AbstractFileCounter
         $codeLines = $totals['lines'] - $totals['empty'] - $totals['comments'];
 
         echo $sep . PHP_EOL;
-        printf("%-{$width}s %10d\n", "Code Lines:",     $codeLines);
-        printf("%-{$width}s %10d\n", "Empty Lines:",    $totals['empty']);
-        printf("%-{$width}s %10d\n", "Comment Lines (//, /*, */, #):", $totals['comments']);
+        OutputPrinter::printFormattedRow("Code Lines:", $codeLines, $width);
+        OutputPrinter::printFormattedRow("Empty Lines:", $totals['empty'], $width);
+        OutputPrinter::printFormattedRow("Comment Lines (//, /*, */, #):", $totals['comments'], $width);
     }
 
     /**
      * @param array<string, int> $exts
-     * @param int $w
+     * @param int $width
      * @param string $sep
      *
      * @return void
@@ -166,7 +166,7 @@ class StatsCounter extends AbstractFileCounter
         ksort($exts);
         foreach ($exts as $ext => $count) {
             $label = strtoupper($ext === '' ? 'no-ext' : $ext);
-            printf("%-{$width}s %10d\n", $label, $count);
+            OutputPrinter::printFormattedRow($label, $count, $width);
         }
     }
 

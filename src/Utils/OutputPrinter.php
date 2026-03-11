@@ -26,6 +26,28 @@ final class OutputPrinter
     */
     public static function printTotal(int $total, string $unit): void
     {
-        echo "\nTotal {$unit}: " . number_format($total, 0, '.', ' ');
+        echo "\nTotal {$unit}: " . self::format($total) . PHP_EOL;
+    }
+
+    /**
+     * @param string $label
+     * @param int $value
+     * @param int $width
+     *
+     * @return void
+    */
+    public static function printFormattedRow(string $label, int $value, int $width): void
+    {
+        printf("%-{$width}s %10s\n", $label, self::format($value));
+    }
+
+    /**
+     * @param int $value
+     *
+     * @return string
+    */
+    public static function format(int $value): string
+    {
+        return number_format($value, 0, '.', ' ');
     }
 }
