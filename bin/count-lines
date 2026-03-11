@@ -6,7 +6,7 @@ declare(strict_types=1);
 require __DIR__ . '/../lib/autoload-finder.php';
 require findAutoload();
 
-use DeveloperSamuel\PhpCodeStats\Counter\RowCounter;
+use DeveloperSamuel\PhpCodeStats\Counter\LineCounter;
 
 $projectRoot = getcwd();
 if (!is_file($projectRoot . '/codestats-analyzer.xml')) {
@@ -15,5 +15,5 @@ if (!is_file($projectRoot . '/codestats-analyzer.xml')) {
     );
 }
 
-$analyzer = new RowCounter($projectRoot);
+$analyzer = new LineCounter($projectRoot);
 $analyzer->analyze();

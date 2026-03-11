@@ -57,8 +57,8 @@ php vendor/bin/count-stats
 # Count files
 php vendor/bin/count-files
 
-# Count rows
-php vendor/bin/count-rows
+# Count lines
+php vendor/bin/count-lines
 
 # Count characters
 php vendor/bin/count-chars

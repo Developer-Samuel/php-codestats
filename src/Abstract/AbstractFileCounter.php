@@ -71,12 +71,16 @@ abstract class AbstractFileCounter
     protected function getFileData(string $file): FileMetrics
     {
         $content = (string) file_get_contents($file);
+        $lines = explode("\n", $content);
 
         return new FileMetrics(
             files: 1,
-            rows: substr_count($content, "\n") + (strlen($content) > 0 ? 1 : 0),
+            lines: count($lines),
             chars: strlen($content),
-            content: $content
+            commentLines: $this->countCommentLines($lines),
+            emptyLines: $this->countEmptyLines($lines),
+            content: $content,
+            extension: pathinfo($file, PATHINFO_EXTENSION)
         );
     }
 
@@ -89,5 +93,60 @@ abstract class AbstractFileCounter
             $this->directory,
             $this->extensions
         );
+    }
+
+    /**
+     * @param string[] $lines
+     *
+     * @return int
+    */
+    private function countEmptyLines(array $lines): int
+    {
+        $count = 0;
+        foreach ($lines as $line) {
+            if (trim($line) === '') {
+                $count++;
+            }
+        }
+
+        return $count;
+    }
+
+    /**
+     * @param string[] $lines
+     *
+     * @return int
+    */
+    private function countCommentLines(array $lines): int
+    {
+        $count = 0;
+        foreach ($lines as $line) {
+            if ($this->isComment(trim($line))) {
+                $count++;
+            }
+        }
+
+        return $count;
+    }
+
+    /**
+     * @param string $line
+     *
+     * @return bool
+    */
+    private function isComment(string $line): bool
+    {
+        if ($line === '') {
+            return false;
+        }
+
+        $prefixes = ['//', '/*', '*/', '#'];
+        foreach ($prefixes as $prefix) {
+            if (str_starts_with($line, $prefix)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

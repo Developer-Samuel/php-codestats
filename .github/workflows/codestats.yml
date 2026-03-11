@@ -44,7 +44,7 @@ jobs:
           php bin/count-stats >> $GITHUB_STEP_SUMMARY
           echo "#### Files Count:" >> $GITHUB_STEP_SUMMARY
           php bin/count-files >> $GITHUB_STEP_SUMMARY
-          echo "#### Rows Count:" >> $GITHUB_STEP_SUMMARY
-          php bin/count-rows >> $GITHUB_STEP_SUMMARY
+          echo "#### Lines Count:" >> $GITHUB_STEP_SUMMARY
+          php bin/count-lines >> $GITHUB_STEP_SUMMARY
           echo "#### Characters Count:" >> $GITHUB_STEP_SUMMARY
           php bin/count-chars >> $GITHUB_STEP_SUMMARY

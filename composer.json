@@ -1,6 +1,6 @@
 {
   "name": "developer-samuel/php-codestats",
-  "description": "A high-performance, strictly typed CLI tool for fast source code volume metrics (files, rows, and characters).",
+  "description": "A high-performance, strictly typed CLI tool for fast source code volume metrics (files, lines, and characters).",
   "type": "library",
   "license": "MIT",
   "autoload": {
@@ -18,7 +18,7 @@
   "bin": [
     "bin/count-stats",
     "bin/count-files",
-    "bin/count-rows",
+    "bin/count-lines",
     "bin/count-chars"
   ],
   "require": {

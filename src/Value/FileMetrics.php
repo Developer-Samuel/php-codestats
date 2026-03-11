@@ -8,14 +8,20 @@ final readonly class FileMetrics
 {
     /**
      * @param int $files
-     * @param int $rows
+     * @param int $lines
      * @param int $chars
+     * @param int $emptyLines
+     * @param int $commentLines
      * @param string $content
+     * @param string $extension
     */
     public function __construct(
         public int $files,
-        public int $rows,
+        public int $lines,
         public int $chars,
-        public string $content
+        public int $emptyLines,
+        public int $commentLines,
+        public string $content,
+        public string $extension
     ) {}
 }

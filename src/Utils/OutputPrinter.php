@@ -13,7 +13,7 @@ final class OutputPrinter
      *
      * @return void
     */
-    public static function printFileProgress(string $file, int $count, string $unit = 'rows'): void
+    public static function printFileProgress(string $file, int $count, string $unit): void
     {
         echo "Processed file: {$file} ({$count} {$unit})\n";
     }
@@ -24,7 +24,7 @@ final class OutputPrinter
      *
      * @return void
     */
-    public static function printTotal(int $total, string $unit = 'rows'): void
+    public static function printTotal(int $total, string $unit): void
     {
         echo "\nTotal {$unit}: " . number_format($total, 0, '.', ' ');
     }

@@ -9,15 +9,15 @@ use DeveloperSamuel\PhpCodeStats\{
     Value\FileMetrics
 };
 
-class RowCounter extends AbstractFileCounter
+class LineCounter extends AbstractFileCounter
 {
     /**
      * @return void
     */
     public function analyze(): void {
         $this->processFile(
-            static fn(FileMetrics $metrics): int => $metrics->rows,
-            'rows'
+            static fn(FileMetrics $metrics): int => $metrics->lines,
+            'lines'
         );
     }
 }
