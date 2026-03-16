@@ -9,7 +9,7 @@ Command-line tool for analyzing source code metrics: files, lines, and character
 Install as a development dependency via Composer:
 
 ```bash
-composer require --dev developer-samuel/php-code-stats
+composer require --dev developer-samuel/php-codestats
 ```
 
 ## Configuration
@@ -25,7 +25,7 @@ You can bootstrap it automatically from the library:
 php -r "require 'vendor/autoload.php'; DeveloperSamuel\PhpCodeStats\Installer::copyConfig();"
 ```
 
-Or copy it manually from vendor/developer-samuel/php-code-stats/config/analyzer.xml to your project root.
+Or copy it manually from vendor/developer-samuel/php-codestats/config/analyzer.xml to your project root.
 
 Example **codestats-analyzer.xml**
 
